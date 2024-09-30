@@ -18,13 +18,69 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const mainContent = document.getElementById("content");
-  mainContent.innerHTML = `
-    <div id="pokemonBoxes" class="pokemonBoxes" ><div class="card" style="width: 20rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div></div>
-      `;
+  const nextPokemonBt = document.getElementById("nextPoakemonBt");
+  nextPokemonBt.innerHTML = `
+  <div class="nextPokemonBt">
+  <button type="button" onclick="loadMorePokemon()" class="btn btn-primary btn-lg"> <img src="./assets/icons/normalBall.png" 
+  onMouseOver="this.src='./assets/icons/ultraBall.png'" onMouseOut="this.src='./assets/icons/normalBall.png'"
+  alt="red poke ball" border="0" >nächste Pokemon</button></div>`;
 });
+
+function pokemonBG(pokeDetails, pokemonBox) {
+  
+  if (pokeDetails.types.some(type => type.type.name === "grass")) {
+    pokemonBox.classList.add("bg-grass");
+  }
+  if (pokeDetails.types.some(type => type.type.name === "fire")) {
+    pokemonBox.classList.add("bg-fire");
+  }
+  if (pokeDetails.types.some(type => type.type.name === "water")) {
+    pokemonBox.classList.add("bg-water");
+  }
+  if (pokeDetails.types.some(type => type.type.name === "electric")) {
+    pokemonBox.classList.add("bg-electric");
+  }
+  if (pokeDetails.types.some(type => type.type.name === "psychic")) {
+    pokemonBox.classList.add("bg-psychic");
+  }
+  if (pokeDetails.types.some(type => type.type.name === "rock")) {
+    pokemonBox.classList.add("bg-rock");
+  }
+  if (pokeDetails.types.some(type => type.type.name === "dark")) {
+    pokemonBox.classList.add("bg-dark");
+  }
+  if (pokeDetails.types.some(type => type.type.name === "poison")) {
+    pokemonBox.classList.add("bg-poison");
+  }
+  if (pokeDetails.types.some(type => type.type.name === "steel")) {
+    pokemonBox.classList.add("bg-steel");
+  }
+  if (pokeDetails.types.some(type => type.type.name === "fighting")) {
+    pokemonBox.classList.add("bg-fighting");
+  }
+  if (pokeDetails.types.some(type => type.type.name === "dragon")) {
+    pokemonBox.classList.add("bg-dragon");
+  }
+  if (pokeDetails.types.some(type => type.type.name === "ghost")) {
+    pokemonBox.classList.add("bg-ghost");
+  }
+  if (pokeDetails.types.some(type => type.type.name === "fairy")) {
+    pokemonBox.classList.add("bg-fairy");
+  }
+  if (pokeDetails.types.some(type => type.type.name === "flying")) {
+    pokemonBox.classList.add("bg-flying");
+  }
+  if (pokeDetails.types.some(type => type.type.name === "normal")) {
+    pokemonBox.classList.add("bg-normal");
+  }
+  if (pokeDetails.types.some(type => type.type.name === "bug")) {
+    pokemonBox.classList.add("bg-bug");
+  }
+  if (pokeDetails.types.some(type => type.type.name === "ice")) {
+    pokemonBox.classList.add("bg-ice");
+  }
+  if (pokeDetails.types.some(type => type.type.name === "ground")) {
+    pokemonBox.classList.add("bg-ground");
+  }
+}
+  

@@ -1,0 +1,13 @@
+@font-face {
+  font-family: pokemonFont;
+  src: url("./assets/fonts/PokemonFont.ttf");
+}
+
+h3 {
+  font-size: 48px;
+  margin: 10px;
+}
+
+p {
+    font-size: 24px;
+}
