@@ -1,9 +1,11 @@
-// Suchanfragen durch itterieren
-//bei den ersten 3 Buchstaben schon ideen zeigen
-const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=100&offset=50";
+const BASE_URL = "https://pokeapi.co/api/v2/pokemon";
+
+// Initialize the starting offset and limit
+let offset = 50;
+let limit = 18;
 
 function init() {
-  getPokemonNames();
+  getPokemonNames(offset, limit);
 }
 
 function minLenghtSearchBar() {
@@ -15,61 +17,48 @@ function minLenghtSearchBar() {
   }
 }
 
-//inhalt festlegen, was soll angezeigt werden
-// buttons für nächste Seite anzeigen
-// on click soll das Bild groß werden
-// pfeile für das näcshte Bild eingeben
+async function getPokemonNames(offset, limit) {
+  let data = await fetchPokemonList(offset, limit);
+  let pokemonContainer = document.getElementById("content");
 
-
-
-async function getPokemonNames() {
-  
-    let response = await fetch(BASE_URL);
-    let data = await response.json(); // Fetch JSON data from the API
-
-    let allPokemon = data.results.slice(0, 10); // Display only the first 10 Pokémon
-    let pokemonContainer = document.getElementById("content"); // The container for the Pokémon cards
-
-    // Iterate through the Pokémon and create a card for each
-    allPokemon.forEach((pokemon) => {
-      // Create a div element for the Pokémon card
-      let pokemonBox = document.createElement("div");
-      pokemonBox.classList.add("card-body");
-      pokemonBox.classList.add("pokemon-card"); // Add a class for styling
-      
-
-      // Fetch the individual Pokémon's details, including the image
-      fetch(pokemon.url)
-        .then((res) => res.json())
-        .then((pokeDetails) => {
-          // Create an image element for the Pokémon's image
-          let img = document.createElement("img");
-          img.src = pokeDetails.sprites.other.home.front_default; // Pokémon image from "home" sprite
-          img.alt = pokemon.name;
-          img.classList.add("pokemon-img");
-
-          // Create a div to hold the text (name and types)
-          let pokemonInfo = document.createElement("div");
-          pokemonInfo.classList.add("pokemon-info");
-
-          // Add Pokémon name and types
-          let types = pokeDetails.types.map((typeInfo) => typeInfo.type.name).join(", "); // Join types by comma
-          pokemonInfo.innerHTML = `<h3>${pokemon.name.capitalize()}</h3><p>Type: ${types}</p>`;
-
-          // Append the image and text to the Pokémon card
-          pokemonBox.appendChild(img); // Append image to the box
-          pokemonBox.appendChild(pokemonInfo); // Append the text next to the image
-
-          pokemonBG(pokeDetails, pokemonBox); // Set background based on Pokémon type
-        });
-
-      // Add the box to the container
-      pokemonContainer.appendChild(pokemonBox);
-    });
- 
+  data.results.forEach(async (pokemon) => {
+    let pokeDetails = await fetchPokemonDetails(pokemon.url);
+    let pokemonBox = createPokemonCard(pokeDetails, pokemon.name);
+    pokemonBG(pokeDetails, pokemonBox);
+    pokemonContainer.appendChild(pokemonBox);
+  });
 }
 
-// first letter in uppercase
+async function fetchPokemonList(offset, limit) {
+  let response = await fetch(`${BASE_URL}?limit=${limit}&offset=${offset}`);
+  return await response.json(); // Returns the Pokémon list
+}
+
+async function fetchPokemonDetails(url) {
+  let response = await fetch(url);
+  return await response.json(); // Returns individual Pokémon details
+}
+
+function createPokemonCard(pokeDetails, pokemonName) {
+  let pokemonBox = document.createElement("div");
+  pokemonBox.classList.add("card-body", "pokemon-card");
+
+  let img = document.createElement("img");
+  img.src = pokeDetails.sprites.other.home.front_default;
+  img.alt = pokemonName;
+  img.classList.add("pokemon-img");
+
+  let pokemonInfo = document.createElement("div");
+  pokemonInfo.classList.add("pokemon-info");
+  let types = pokeDetails.types.map((t) => t.type.name).join(", ");
+  pokemonInfo.innerHTML = `<h3>${pokemonName.capitalize()}</h3><p>Type: ${types}</p>`;
+
+  pokemonBox.append(img, pokemonInfo);
+  return pokemonBox; // Return the complete card
+}
+
+
+// First letter in uppercase
 Object.defineProperty(String.prototype, "capitalize", {
   value: function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
@@ -77,10 +66,10 @@ Object.defineProperty(String.prototype, "capitalize", {
   enumerable: false,
 });
 
+// Load more Pokémon when the "Next" button is pressed
 function loadMorePokemon() {
-// hier muss dann festgelegt werden von welchem punkt die daten vom API kommen
-  let allPokemon = data.results.slice(10, 30);
-  
+  offset += limit; // Increase the offset to get the next set of Pokémon
+  getPokemonNames(offset, limit); // Fetch the next set of Pokémon
 }
 
 

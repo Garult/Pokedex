@@ -27,60 +27,50 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function pokemonBG(pokeDetails, pokemonBox) {
-  
-  if (pokeDetails.types.some(type => type.type.name === "grass")) {
-    pokemonBox.classList.add("bg-grass");
-  }
-  if (pokeDetails.types.some(type => type.type.name === "fire")) {
-    pokemonBox.classList.add("bg-fire");
-  }
-  if (pokeDetails.types.some(type => type.type.name === "water")) {
-    pokemonBox.classList.add("bg-water");
-  }
-  if (pokeDetails.types.some(type => type.type.name === "electric")) {
-    pokemonBox.classList.add("bg-electric");
-  }
-  if (pokeDetails.types.some(type => type.type.name === "psychic")) {
-    pokemonBox.classList.add("bg-psychic");
-  }
-  if (pokeDetails.types.some(type => type.type.name === "rock")) {
-    pokemonBox.classList.add("bg-rock");
-  }
-  if (pokeDetails.types.some(type => type.type.name === "dark")) {
-    pokemonBox.classList.add("bg-dark");
-  }
-  if (pokeDetails.types.some(type => type.type.name === "poison")) {
-    pokemonBox.classList.add("bg-poison");
-  }
-  if (pokeDetails.types.some(type => type.type.name === "steel")) {
-    pokemonBox.classList.add("bg-steel");
-  }
-  if (pokeDetails.types.some(type => type.type.name === "fighting")) {
-    pokemonBox.classList.add("bg-fighting");
-  }
-  if (pokeDetails.types.some(type => type.type.name === "dragon")) {
-    pokemonBox.classList.add("bg-dragon");
-  }
-  if (pokeDetails.types.some(type => type.type.name === "ghost")) {
-    pokemonBox.classList.add("bg-ghost");
-  }
-  if (pokeDetails.types.some(type => type.type.name === "fairy")) {
-    pokemonBox.classList.add("bg-fairy");
-  }
-  if (pokeDetails.types.some(type => type.type.name === "flying")) {
-    pokemonBox.classList.add("bg-flying");
-  }
-  if (pokeDetails.types.some(type => type.type.name === "normal")) {
-    pokemonBox.classList.add("bg-normal");
-  }
-  if (pokeDetails.types.some(type => type.type.name === "bug")) {
-    pokemonBox.classList.add("bg-bug");
-  }
-  if (pokeDetails.types.some(type => type.type.name === "ice")) {
-    pokemonBox.classList.add("bg-ice");
-  }
-  if (pokeDetails.types.some(type => type.type.name === "ground")) {
-    pokemonBox.classList.add("bg-ground");
-  }
+  const typeClassMap = {
+    grass: { class: "bg-grass", image: "./assets/icons/types/leafe.png" },
+    fire: { class: "bg-fire", image: "./assets/icons/types/fire.png" },
+    water: { class: "bg-water", image: "./assets/icons/types/water.png" },
+    electric: {
+      class: "bg-electric",
+      image: "./assets/icons/types/electric.png",
+    },
+    psychic: { class: "bg-psychic", image: "./assets/icons/types/psychic.png" },
+    rock: { class: "bg-rock", image: "./assets/icons/types/rock.png" },
+    dark: { class: "bg-dark", image: "./assets/icons/types/dark.png" },
+    poison: { class: "bg-poison", image: "./assets/icons/types/poison.png" },
+    steel: { class: "bg-steel", image: "./assets/icons/types/metal.png" },
+    fighting: {
+      class: "bg-fighting",
+      image: "./assets/icons/types/fighting.png",
+    },
+    dragon: { class: "bg-dragon", image: "./assets/icons/types/dragon.png" },
+    ghost: { class: "bg-ghost", image: "./assets/icons/types/ghost.png" },
+    fairy: { class: "bg-fairy", image: "./assets/icons/types/fairy.png" },
+    flying: { class: "bg-flying", image: "./assets/icons/types/flying.png" },
+    normal: { class: "bg-normal", image: "./assets/icons/types/normal.png" },
+    bug: { class: "bg-bug", image: "./assets/icons/types/bug.png" },
+    ice: { class: "bg-ice", image: "./assets/icons/types/ice.png" },
+    ground: { class: "bg-ground", image: "./assets/icons/types/ground.png" },
+  };
+
+  // Add background class and image for each type
+  pokeDetails.types.forEach((typeInfo) => {
+    let typeName = typeInfo.type.name;
+    let typeData = typeClassMap[typeName];
+
+    if (typeData) {
+      // Set the background class
+      pokemonBox.classList.add(typeData.class);
+
+      // Create an image element for the type and set its source
+      let typeImg = document.createElement("img");
+      typeImg.src = typeData.image;
+      typeImg.alt = `${typeName} type icon`;
+      typeImg.classList.add("type-icon"); // You can style this class in CSS
+
+      // Append the type image to the box or a specific container inside the box
+      pokemonBox.appendChild(typeImg);
+    }
+  });
 }
-  

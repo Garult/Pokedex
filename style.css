@@ -78,7 +78,7 @@ h1:hover {
   padding: 10px;
   margin: 20px;
   text-align: center;
-  width: 400px;
+  width: auto;
   height: 200px;
   color: white;
 }
@@ -117,7 +117,7 @@ h1:hover {
   background-color: blue;
 }
 .bg-electric {
-  background-color: yellow;
+  background-color: rgb(196, 196, 34);
 }
 .bg-psychic {
   background-color: purple;
@@ -173,3 +173,9 @@ h1:hover {
   height: 40px;
   margin-right: 10px;
 }
+
+.type-icon {
+  height: 60 !important;  
+  width: 60px !important;   
+  object-fit: contain;      
+}         
