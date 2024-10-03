@@ -1,11 +1,14 @@
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon";
 
-// Initialize the starting offset and limit
+
 let offset = 50;
 let limit = 18;
 
 function init() {
+  loadingSpinner();
   getPokemonNames(offset, limit);
+  loadingSpinnerLoadMorePokemon();
+  
 }
 
 function minLenghtSearchBar() {
@@ -31,34 +34,51 @@ async function getPokemonNames(offset, limit) {
 
 async function fetchPokemonList(offset, limit) {
   let response = await fetch(`${BASE_URL}?limit=${limit}&offset=${offset}`);
-  return await response.json(); // Returns the Pokémon list
+  return await response.json();
 }
+
+let idCounter = 1; 
 
 async function fetchPokemonDetails(url) {
   let response = await fetch(url);
-  return await response.json(); // Returns individual Pokémon details
+  return await response.json();
 }
 
 function createPokemonCard(pokeDetails, pokemonName) {
   let pokemonBox = document.createElement("div");
+
+  
+  pokemonBox.setAttribute('id', `pokemon-${idCounter}`);
+  idCounter++; 
+
   pokemonBox.classList.add("card-body", "pokemon-card");
 
-  let img = document.createElement("img");
-  img.src = pokeDetails.sprites.other.home.front_default;
-  img.alt = pokemonName;
-  img.classList.add("pokemon-img");
+  let img = createPokemonImg(pokeDetails, pokemonName);
+  let pokemonInfo = createPokemonTypes(pokeDetails, pokemonName);
 
+  pokemonBox.append(img, pokemonInfo);
+  return pokemonBox;
+  
+}
+
+function createPokemonTypes(pokeDetails, pokemonName) {
   let pokemonInfo = document.createElement("div");
   pokemonInfo.classList.add("pokemon-info");
   let types = pokeDetails.types.map((t) => t.type.name).join(", ");
   pokemonInfo.innerHTML = `<h3>${pokemonName.capitalize()}</h3><p>Type: ${types}</p>`;
 
-  pokemonBox.append(img, pokemonInfo);
-  return pokemonBox; // Return the complete card
+  return pokemonInfo;
 }
 
+function createPokemonImg(pokeDetails, pokemonName) {
+  let img = document.createElement("img");
+  img.src = pokeDetails.sprites.other.home.front_default;
+  img.alt = pokemonName;
+  img.classList.add("pokemon-img");
 
-// First letter in uppercase
+  return img;
+}
+
 Object.defineProperty(String.prototype, "capitalize", {
   value: function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
@@ -66,12 +86,65 @@ Object.defineProperty(String.prototype, "capitalize", {
   enumerable: false,
 });
 
-// Load more Pokémon when the "Next" button is pressed
+document.addEventListener("DOMContentLoaded", () => {
+  const nextPokemonBt = document.getElementById("nextPoakemonBt");
+  nextPokemonBt.innerHTML = nextPokemonBtText;
+});
+
 function loadMorePokemon() {
-  offset += limit; // Increase the offset to get the next set of Pokémon
-  getPokemonNames(offset, limit); // Fetch the next set of Pokémon
+  offset += limit; 
+  getPokemonNames(offset, limit); 
 }
 
+function loadingSpinner() {
+  let loading = document.getElementById("loadingSpinner");
+  let backGroundCards = document.getElementById("content");
 
+  setTimeout(() => {
+    loading.style.opacity = 0;
+    backGroundCards.style.opacity = 1;
+    setTimeout(() => {
+      loading.style.display = "none";
+    }, 2000);
+  }, 1800);
+}
 
+function loadingSpinnerLoadMorePokemon() {
+  let btnEl = document.getElementById("nextPoakemonBt");
+  btnEl.addEventListener("click", () => {
+    btnEl.innerHTML = `<div class="o-pokeball c-loader u-bounce">`;
+    btnEl.disabled = true;
+    btnEl.style.opacity = 1;
 
+    setTimeout(() => {
+      
+      btnEl.innerHTML = nextPokemonBtText;
+      btnEl.disabled = false;
+      btnEl.style.opacity = 1;
+    }, 3000);
+  });
+}
+
+// id muss dynamisch vergeben werden
+
+function openOverlay(idCounter) {
+  const openDiv = document.getElementById(`pokemon-${idCounter}`);
+  const closeDiv = document.querySelector(".closeOverlay"); // Selecting the close button
+  const overlay = document.querySelector(".overlay");
+
+  // Ensure openDiv exists before attaching the event listener
+  if (openDiv) {
+    openDiv.addEventListener("click", () => {
+      overlay.style.display = "block"; // Show the overlay when a Pokémon card is clicked
+    });
+  }
+
+  // Ensure closeDiv exists before attaching the event listener
+  if (closeDiv) {
+    closeDiv.addEventListener("click", () => {
+      overlay.style.display = "none"; // Hide the overlay when the close button is clicked
+    });
+  }
+}
+
+// 
