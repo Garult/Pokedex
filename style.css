@@ -95,6 +95,7 @@ h1:hover {
 .pokemon-info {
   display: flex;
   flex-direction: column; /* Ensure the name and types stack vertically */
+  padding-top: 10px;
 }
 
 .pokemon-info h3 {
@@ -184,15 +185,15 @@ h1:hover {
 }
 
 #overlay {
-  position: fixed; 
-  display: none; 
-  width: 100%; 
-  height: 100%; 
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5); 
-  z-index: 2; 
-  cursor: pointer; 
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  cursor: pointer;
 }
 
 .overlay-content {
@@ -215,14 +216,14 @@ h1:hover {
   opacity: 1;
   height: 100px;
   width: 100px;
-  background: linear-gradient(to bottom, rgb(254, 0, 1) 50%, white 50% );
+  background: linear-gradient(to bottom, rgb(254, 0, 1) 50%, white 50%);
   border-radius: 50%;
   border: 8px solid black;
   animation: spin 1s linear infinite;
 }
 
 #loadingSpinner::before {
-  content: '';
+  content: "";
   position: absolute;
   height: 8px;
   width: 100px;
@@ -232,7 +233,7 @@ h1:hover {
 }
 
 #loadingSpinner::after {
-  content: '';
+  content: "";
   position: absolute;
   height: 38px;
   width: 38px;
@@ -241,8 +242,8 @@ h1:hover {
   top: 50px;
   left: 50px;
   transform: translate(-50%, -50%);
-  box-shadow: inset 0 0 0 8px black, inset 0 0 0 10px white, inset 0 0 0 12px black;
-
+  box-shadow: inset 0 0 0 8px black, inset 0 0 0 10px white,
+    inset 0 0 0 12px black;
 }
 
 /* Spin Animation */
@@ -257,7 +258,7 @@ h1:hover {
 
 .u-bounce {
   animation: bounce 1000ms infinite;
-  animation-timing-function: cubic-bezier(0,1.28,0,1.27);
+  animation-timing-function: cubic-bezier(0, 1.28, 0, 1.27);
 }
 
 .o-pokeball {
@@ -266,7 +267,7 @@ h1:hover {
   border-radius: 50%;
   border: solid 2px black;
   position: relative;
-  background: linear-gradient(to bottom, #EEEEEE 0%,#FFFFFF 100%);
+  background: linear-gradient(to bottom, #eeeeee 0%, #ffffff 100%);
   margin: 10px auto;
 }
 
@@ -277,7 +278,7 @@ h1:hover {
   height: 24px; /* Half of 50px */
   border-bottom: solid 2px black;
   border-radius: 25px 25px 0 0;
-  background: linear-gradient(to bottom, #d10000 0%,#ff0000 50%);
+  background: linear-gradient(to bottom, #d10000 0%, #ff0000 50%);
   padding-bottom: 10px;
 }
 
@@ -285,22 +286,20 @@ h1:hover {
   content: "";
   width: 10px; /* One-fifth of 50px */
   height: 10px;
-  background: linear-gradient(to bottom, #fff 0%,#ccc 100%);
+  background: linear-gradient(to bottom, #fff 0%, #ccc 100%);
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   padding-bottom: 10px;
-  box-shadow: 0 0 0 1px black,
-              0 0 0 2px #ddd,
-              0 0 0 4px black,
-              0 0 6px 10px rgba(0,0,0,0.4);
-              
+  box-shadow: 0 0 0 1px black, 0 0 0 2px #ddd, 0 0 0 4px black,
+    0 0 6px 10px rgba(0, 0, 0, 0.4);
 }
 
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -309,14 +308,45 @@ h1:hover {
 }
 
 #overlay {
-  background-color: green;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  
+  position: sticky;
+  position: -webkit-sticky;
+  margin: auto;
+  top: 200px;
+  left: 200px;
+  bottom: 200px;
+  right: 200px;
   z-index: 2;
   display: none;
+  border-radius: 40px;
+  padding: 2px;
+  text-align: center;
+  width: 600px;
+  height: 800px;
+  color: white;
+  background-color: rgb(184, 181, 181);
+}
+
+#overlay img {
+  height: 200px;
+  width: 200px;
+}
+
+.overlayContainer {
+  height: 100%;
+  width: 100%;
+  border-radius: 40px;
+}
+
+.overlayHeadline h2 {
+  color: white;
+  text-align: center;
+  font-size: 48px;
+}
+
+.overlayHeadline h2:hover {
+  color: #ee4037;
+  transform: scale(1.1);
 }
 
 .closeOverlay {
@@ -325,3 +355,7 @@ h1:hover {
   right: 10px;
   cursor: pointer;
 }
+
+ .no-scroll {
+            overflow: hidden;
+        }

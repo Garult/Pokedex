@@ -1,6 +1,5 @@
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon";
 
-
 let offset = 50;
 let limit = 18;
 
@@ -8,7 +7,6 @@ function init() {
   loadingSpinner();
   getPokemonNames(offset, limit);
   loadingSpinnerLoadMorePokemon();
-  
 }
 
 function minLenghtSearchBar() {
@@ -37,7 +35,7 @@ async function fetchPokemonList(offset, limit) {
   return await response.json();
 }
 
-let idCounter = 1; 
+let idCounter = 1;
 
 async function fetchPokemonDetails(url) {
   let response = await fetch(url);
@@ -47,18 +45,21 @@ async function fetchPokemonDetails(url) {
 function createPokemonCard(pokeDetails, pokemonName) {
   let pokemonBox = document.createElement("div");
 
-  
   pokemonBox.setAttribute('id', `pokemon-${idCounter}`);
-  idCounter++; 
-
   pokemonBox.classList.add("card-body", "pokemon-card");
 
   let img = createPokemonImg(pokeDetails, pokemonName);
   let pokemonInfo = createPokemonTypes(pokeDetails, pokemonName);
 
   pokemonBox.append(img, pokemonInfo);
+  document.getElementById("content").appendChild(pokemonBox);
+
+  // Add click event listener to open the overlay and pass both idCounter and pokemonName
+  pokemonBox.addEventListener("click", () => openOverlay(idCounter, pokeDetails, pokemonName.capitalize(), pokemonBox));
+
+  idCounter++; // Increment the id counter after attaching the event listener
+
   return pokemonBox;
-  
 }
 
 function createPokemonTypes(pokeDetails, pokemonName) {
@@ -92,8 +93,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function loadMorePokemon() {
-  offset += limit; 
-  getPokemonNames(offset, limit); 
+  offset += limit;
+  getPokemonNames(offset, limit);
 }
 
 function loadingSpinner() {
@@ -117,7 +118,6 @@ function loadingSpinnerLoadMorePokemon() {
     btnEl.style.opacity = 1;
 
     setTimeout(() => {
-      
       btnEl.innerHTML = nextPokemonBtText;
       btnEl.disabled = false;
       btnEl.style.opacity = 1;
@@ -125,26 +125,51 @@ function loadingSpinnerLoadMorePokemon() {
   });
 }
 
-// id muss dynamisch vergeben werden
 
-function openOverlay(idCounter) {
-  const openDiv = document.getElementById(`pokemon-${idCounter}`);
-  const closeDiv = document.querySelector(".closeOverlay"); // Selecting the close button
-  const overlay = document.querySelector(".overlay");
+function openOverlay(idCounter, pokeDetails, pokemonName, pokemonBox) {
+  let overlay = document.querySelector(".overlay");
+  let closeDiv = document.querySelector(".overlay");
+  const body = document.body;
+  body.classList.add('no-scroll');
 
-  // Ensure openDiv exists before attaching the event listener
-  if (openDiv) {
-    openDiv.addEventListener("click", () => {
-      overlay.style.display = "block"; // Show the overlay when a Pokémon card is clicked
-    });
-  }
+  overlay.style.display = "block"; 
+  insertOverlayData(idCounter, pokeDetails, pokemonName, pokemonBox); 
 
-  // Ensure closeDiv exists before attaching the event listener
-  if (closeDiv) {
-    closeDiv.addEventListener("click", () => {
-      overlay.style.display = "none"; // Hide the overlay when the close button is clicked
-    });
+  // Add event listener to close the overlay
+  closeDiv.addEventListener("click", () => {
+    overlay.style.display = "none"; // Hide the overlay when the close button is clicked
+    body.classList.remove('no-scroll');
+  });
+}
+
+function insertOverlayData(idCounter, pokeDetails, pokemonName) {
+  let idCounterPokemon = idCounter;
+  let pokemonImg = createPokemonImg(pokeDetails, pokemonName); // Get the Pokémon image
+  let pokemonInfoName = createPokemonTypes(pokeDetails, pokemonName); // Get the Pokémon info
+  let overlayContent = document.getElementById("overlay");
+
+  // Get the background color from pokemonBG and apply it to the overlay
+  let overlayContainer = document.createElement('div');
+  overlayContainer.classList.add("overlayContainer");
+  overlayContainer.setAttribute("id", idCounterPokemon);
+
+  if (overlayContent) {
+    overlayContent.innerHTML = ''; // Clear previous content
+
+    // Apply the background from pokemonBG to the overlay container
+    pokemonBG(pokeDetails, overlayContainer); 
+
+    // Append the elements (image and info) to the overlay container
+    overlayContainer.appendChild(pokemonImg);
+    overlayContainer.appendChild(pokemonInfoName);
+
+    // Append the fully styled container to the overlay
+    overlayContent.appendChild(overlayContainer);
   }
 }
 
-// 
+
+
+// to do: noch ein Overlay was in der unteren Hälfte des Overlays sitzt
+// 4 Reiter machen mit verschiedenen daten
+// pfeile links und rechts um durch die daten zu scrollen

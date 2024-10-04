@@ -70,3 +70,5 @@ function pokemonBG(pokeDetails, pokemonBox) {
     }
   });
 }
+
+
