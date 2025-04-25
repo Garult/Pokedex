@@ -15,10 +15,17 @@ body {
   border-bottom: 1px solid grey;
 }
 
+@media (max-width: 780px) {
+  .headerContainer  {
+    flex-direction: column;
+    width:fit-content;
+  }
+}
+
 .headerPngContainer {
   display: flex;
   flex-direction: row;
-  align-items: center; /* Ensures alignment with h1 */
+  align-items: center; 
 }
 
 .ball1,
@@ -51,7 +58,7 @@ body {
 }
 
 h1 {
-  margin-left: 20px; /* Adds space between the balls and the title */
+  margin-left: 20px;
 }
 
 h1:hover {
@@ -70,6 +77,20 @@ h1:hover {
   margin-top: 40px;
   opacity: 0.5;
 }
+
+@media (max-width: 500px) {
+  #content   {
+    width:fit-content;
+  }
+}
+
+@media (max-width: 1920px) {
+  #content {
+    max-width: 1920px;
+    margin: 0 auto;
+  }
+}
+
 .card-body {
   display: flex;
   justify-content: space-evenly;
@@ -88,22 +109,22 @@ h1:hover {
 .card-body img {
   width: 170px;
   height: 170px;
-  object-fit: contain; /* Keep the aspect ratio of the image */
-  margin-right: 20px; /* Add some space between the image and text */
+  object-fit: contain;
+  margin-right: 20px;
 }
 
 .pokemon-info {
   display: flex;
-  flex-direction: column; /* Ensure the name and types stack vertically */
+  flex-direction: column;
   padding-top: 10px;
 }
 
 .pokemon-info h3 {
-  margin: 0; /* Remove margin from the heading */
+  margin: 0;
 }
 
 .pokemon-info p {
-  margin: 5px 0 0 0; /* Small margin for the paragraph */
+  margin: 5px 0 0 0;
 }
 
 .pokemon-img:hover {
@@ -184,29 +205,6 @@ h1:hover {
   object-fit: contain;
 }
 
-#overlay {
-  position: fixed;
-  display: none;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2;
-  cursor: pointer;
-}
-
-.overlay-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-}
-
 #loadingSpinner {
   position: fixed;
   inset: 0;
@@ -246,7 +244,6 @@ h1:hover {
     inset 0 0 0 12px black;
 }
 
-/* Spin Animation */
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -275,7 +272,7 @@ h1:hover {
   content: "";
   display: block;
   width: 50px;
-  height: 24px; /* Half of 50px */
+  height: 24px; 
   border-bottom: solid 2px black;
   border-radius: 25px 25px 0 0;
   background: linear-gradient(to bottom, #d10000 0%, #ff0000 50%);
@@ -284,7 +281,7 @@ h1:hover {
 
 .o-pokeball:after {
   content: "";
-  width: 10px; /* One-fifth of 50px */
+  width: 10px; 
   height: 10px;
   background: linear-gradient(to bottom, #fff 0%, #ccc 100%);
   position: absolute;
@@ -308,7 +305,6 @@ h1:hover {
 }
 
 #overlay {
-  
   position: sticky;
   position: -webkit-sticky;
   margin: auto;
@@ -336,6 +332,7 @@ h1:hover {
   height: 100%;
   width: 100%;
   border-radius: 40px;
+  position: relative;
 }
 
 .overlayHeadline h2 {
@@ -356,6 +353,120 @@ h1:hover {
   cursor: pointer;
 }
 
- .no-scroll {
-            overflow: hidden;
-        }
+.no-scroll {
+  overflow: hidden;
+}
+
+.overlayContainerDetails {
+  height: 60%;
+  width: 99.5%;
+  border-radius: 40px;
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+}
+
+.overlayContainerDetailsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+  text-align: center;
+  font-size: 24px;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.overlayContainerDetailsHeaderBtn {
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  cursor: pointer;
+  flex-grow: 1;
+  margin: 0 5px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.overlayContainerDetailsHeaderBtn:hover {
+  background-color: #f0f0f0;
+}
+
+.pokemonOverlayDetails {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: auto;
+  width: 100%;
+  border-collapse: collapse;
+  color: black;
+  background-color: white; 
+}
+
+.pokemonOverlayDetailsSparkling {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: auto;
+  width: 100%;
+  border-collapse: collapse;
+  color: black;
+  background-color: transparent; 
+  background: url('assets/icons/sparklesBg.png') no-repeat center center;
+  background-size: cover;
+  
+}
+
+.pokemonOverlayDetails th,
+.pokemonOverlayDetails td {
+  padding: 18px;
+  text-align: left;
+  font-size: 26px;
+  color: black;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.pokemonOverlayDetails th {
+  color: black;
+}
+
+.pokemonOverlayDetailsSparkling {
+  background-color: grey;
+  background-image: url(./assets/icons/sparklesBg.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 40px;
+  height: 80%;
+  padding-top: 80px;
+}
+
+.progress {
+  height: 50px;
+  width: 100%;
+  font-size: 24px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.progress-bar {
+  text-align: left;
+  padding-left: 10px;
+  white-space: nowrap;
+}
+
+.navBtn {
+  border: none;
+  background-color: transparent;
+}
+
+.headerContainer {
+  position: relative;
+}
+
+#searchBarInput {
+  font-family: "Times New Roman", Times, serif;
+}
