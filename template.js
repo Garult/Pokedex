@@ -40,27 +40,6 @@ function createNextPokemonButtonIcon() {
     `;
 }
 
-const pokemontype = {
-    grass: { class: "bg-grass", image: "./assets/icons/types/leafe.png" },
-    fire: { class: "bg-fire", image: "./assets/icons/types/fire.png" },
-    water: { class: "bg-water", image: "./assets/icons/types/water.png" },
-    electric: { class: "bg-electric", image: "./assets/icons/types/electric.png" },
-    psychic: { class: "bg-psychic", image: "./assets/icons/types/psychic.png" },
-    rock: { class: "bg-rock", image: "./assets/icons/types/rock.png" },
-    dark: { class: "bg-dark", image: "./assets/icons/types/dark.png" },
-    poison: { class: "bg-poison", image: "./assets/icons/types/poison.png" },
-    steel: { class: "bg-steel", image: "./assets/icons/types/metal.png" },
-    fighting: { class: "bg-fighting", image: "./assets/icons/types/fighting.png" },
-    dragon: { class: "bg-dragon", image: "./assets/icons/types/dragon.png" },
-    ghost: { class: "bg-ghost", image: "./assets/icons/types/ghost.png" },
-    fairy: { class: "bg-fairy", image: "./assets/icons/types/fairy.png" },
-    flying: { class: "bg-flying", image: "./assets/icons/types/flying.png" },
-    normal: { class: "bg-normal", image: "./assets/icons/types/normal.png" },
-    bug: { class: "bg-bug", image: "./assets/icons/types/bug.png" },
-    ice: { class: "bg-ice", image: "./assets/icons/types/ice.png" },
-    ground: { class: "bg-ground", image: "./assets/icons/types/ground.png" },
-};
-
 function pokemonBG(pokeDetails, pokemonBox) {
     pokeDetails.types.forEach(typeInfo => addTypeClassAndIcon(typeInfo, pokemonBox));
 }
@@ -90,10 +69,7 @@ function overlayDetailsAbout(pokeDetails) {
 }
 
 function createAboutTable(pokeDetails) {
-    const species = pokeDetails.species.name.capitalize();
-    const height = pokeDetails.height * 10;
-    const weight = pokeDetails.weight / 10;
-    const abilities = pokeDetails.abilities.map(ability => ability.ability.name.capitalize()).join(", ");
+    const { species, height, weight, abilities } = extractPokemonDetails(pokeDetails);
     return `
         <table>
             <tr><th>Species</th><td>${species}</td></tr>
@@ -102,6 +78,16 @@ function createAboutTable(pokeDetails) {
             <tr><th>Abilities</th><td>${abilities}</td></tr>
         </table>
     `;
+}
+
+function extractPokemonDetails(pokeDetails) {
+    const species = pokeDetails.species.name.capitalize();
+    const height = pokeDetails.height * 10; // Convert to cm
+    const weight = pokeDetails.weight / 10; // Convert to kg
+    const abilities = pokeDetails.abilities
+        .map(ability => ability.ability.name.capitalize())
+        .join(", ");
+    return { species, height, weight, abilities };
 }
 
 function overlayDetailsBaseStats(pokeDetails) {
@@ -157,6 +143,7 @@ function createAboutContainer() {
     if (parent) parent.appendChild(container);
     return container;
 }
+
 
 
 

@@ -111,6 +111,13 @@ h1:hover {
   box-sizing: border-box; /* Prevent padding from affecting total size */
 }
 
+@media (max-width: 780px) {
+  .card-body  {
+    flex-direction: column;
+    width:200px;
+  }
+}
+
 .card-body:hover {
   transition: all .2s ease-in-out;
   transform: scale(1.1);
@@ -123,6 +130,13 @@ h1:hover {
   margin-right: 10px;
 }
 
+@media (max-width: 780px) {
+  .card-body img  {
+  width: 80px;
+  height: 80px;
+  }
+}
+
 .pokemon-info {
   flex-grow: 1;
   text-align: center;
@@ -132,12 +146,24 @@ h1:hover {
   margin: 0;
 }
 
+@media (max-width: 780px) {
+  .pokemon-info h3  {
+  font-size: 18px;
+  }
+}
+
 .pokemon-info h3:hover {
   transform: scale(1.3) rotate(8deg);
 }
 
 .pokemon-info p {
   margin: 5px 0 0 0;
+}
+
+@media (max-width: 780px) {
+  .pokemon-info p  {
+  font-size: 16px;
+  }
 }
 
 .pokemon-img:hover {
