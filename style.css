@@ -1,7 +1,7 @@
 body {
   margin: 0;
   height: 100vh;
-  background-color: #2f2f2f;
+  background-color: rgb(68,68,68);
   font-family: pokemonFont;
 }
 
@@ -11,7 +11,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  color: white;
+  color: #F2F3F4;
   border-bottom: 1px solid grey;
 }
 
@@ -63,9 +63,9 @@ h1 {
 }
 
 h1:hover {
-  color: #ee4037;
+  color: rgb(161,0,40);
   transition: all .2s ease-in-out;
-  transform: scale(1.4);
+  transform: scale(2.0);
 }
 .input-group {
   width: auto;
@@ -100,13 +100,13 @@ h1:hover {
   justify-content: space-evenly;
   align-items: center;
   border: 1px solid #ccc;
-  border-radius: 40px;
+  border-radius: 41px;
   padding: 10px;
   margin: 20px;
   text-align: center;
   width: min(480px, 80vw);       /* Fixed width for uniformity */
   height: 300px;        /* Already set, which is good */
-  color: white;
+  color: #F2F3F4;
   cursor: pointer;
   box-sizing: border-box; /* Prevent padding from affecting total size */
 }
@@ -172,58 +172,58 @@ h1:hover {
 }
 
 .bg-grass {
-  background-color: green;
+  background-color: rgb(136,175,149);
 }
 .bg-fire {
-  background-color: rgb(255, 102, 0);
+  background-color: rgb(227,158,131);
 }
 .bg-water {
-  background-color: blue;
+  background-color: rgb(140,151,200);
 }
 .bg-electric {
-  background-color: rgb(196, 196, 34);
+  background-color: rgb(240,230,171);
 }
 .bg-psychic {
-  background-color: purple;
+  background-color: rgb(211,186,225);
 }
 .bg-rock {
   background-color: rgb(128, 94, 66);
 }
 .bg-dark {
-  background-color: darkslategray;
+  background-color: rgb(151,147,147);
 }
 .bg-poison {
-  background-color: violet;
+  background-color: rgb(130,89,174);
 }
 .bg-steel {
-  background-color: grey;
+  background-color: rgb(186,183,183);
 }
 .bg-fighting {
-  background-color: red;
+  background-color: rgb(161,0,40);
 }
 .bg-dragon {
-  background-color: rgb(0, 153, 255);
+  background-color: rgb(87,92,148);
 }
 .bg-ghost {
-  background-color: rgb(201, 213, 221);
+  background-color: rgb(238,233,219);
 }
 .bg-ground {
-  background-color: rgb(156, 127, 65);
+  background-color: rgb(133,94,92);
 }
 .bg-fairy {
-  background-color: rgb(250, 94, 198);
+  background-color: rgb(255,200,200);
 }
 .bg-flying {
-  background-color: rgb(157, 165, 243);
+  background-color: rgb(125,173,186);
 }
 .bg-normal {
-  background-color: rgb(199, 183, 158);
+  background-color: rgb(183,231,208);
 }
 .bg-bug {
-  background-color: rgb(83, 189, 22);
+  background-color: rgb(201,225,121);
 }
 .bg-ice {
-  background-color: rgb(48, 240, 214);
+  background-color: rgb(71,156,157);
 }
 
 .nextPokemonBt {
@@ -346,13 +346,11 @@ h1:hover {
 }
 
 #overlay {
-  position: sticky;
-  position: -webkit-sticky;
+  position: fixed;
+  top: 150px;
+  left: 0;
+  right: 0;
   margin: auto;
-  top: 200px;
-  left: 200px;
-  bottom: 200px;
-  right: 200px;
   z-index: 2;
   display: none;
   border-radius: 40px;
@@ -360,8 +358,16 @@ h1:hover {
   text-align: center;
   width: 600px;
   height: 800px;
-  color: white;
+  color: #F2F3F4;
   background-color: rgb(184, 181, 181);
+}
+
+@media (max-width: 780px) {
+  #overlay  {
+    top: 250px;
+    width: 270px;
+    height: 600px;
+  }
 }
 
 #overlay img {
@@ -369,8 +375,15 @@ h1:hover {
   width: 200px;
 }
 
+@media (max-width: 780px) {
+  #overlay img  {
+  height: 120px;
+  width: 120px;
+  }
+}
+
 .overlayContainer {
-  height: 100%;
+  height: 99%;
   width: 100%;
   border-radius: 40px;
   position: relative;
@@ -402,7 +415,7 @@ h1:hover {
   height: 60%;
   width: 99.5%;
   border-radius: 40px;
-  background-color: white;
+  background-color: rgb(238,233,219);
   position: absolute;
   bottom: 0;
 }
@@ -418,8 +431,15 @@ h1:hover {
   padding: 10px;
 }
 
+@media (max-width: 780px) {
+  .overlayContainerDetailsHeader  {
+  flex-direction: column;
+  font-size: 18px;
+  }
+}
+
 .overlayContainerDetailsHeaderBtn {
-  background-color: white;
+  background-color:  #F2F3F4;
   border: 1px solid #ccc;
   padding: 10px 20px;
   cursor: pointer;
@@ -431,7 +451,7 @@ h1:hover {
 
 .overlayContainerDetailsHeaderBtn:hover {
   transition: all .3s ease-in-out;
-  background-color: #f0f0f0;
+  background-color: #E9ECEF;
 }
 
 .pokemonOverlayDetails {
@@ -443,8 +463,7 @@ h1:hover {
   margin-top: auto;
   width: 100%;
   border-collapse: collapse;
-  color: black;
-  background-color: white; 
+  background-color: #EEE9DB;
 }
 
 .pokemonOverlayDetailsSparkling {
@@ -457,19 +476,26 @@ h1:hover {
   width: 100%;
   border-collapse: collapse;
   color: black;
-  background-color: transparent; 
+  background-color: #EEE9DB;
   background: url('assets/icons/sparklesBg.png') no-repeat center center;
   background-size: cover;
-  
 }
 
 .pokemonOverlayDetails th,
 .pokemonOverlayDetails td {
   padding: 18px;
   text-align: left;
-  font-size: 26px;
+  font-size: 25px;
   color: black;
   font-family: "Times New Roman", Times, serif;
+  background-color: #EEE9DB;
+}
+
+@media (max-width: 780px) {
+  .pokemonOverlayDetails th,
+.pokemonOverlayDetails td {
+  font-size: 18px;
+  }
 }
 
 .pokemonOverlayDetails th {
@@ -512,3 +538,12 @@ h1:hover {
 #searchBarInput {
   font-family: "Times New Roman", Times, serif;
 }
+
+#searchBarInput:hover {
+  transform: scale(1.1);
+}
+
+.tbody {
+  background-color:#F2F3F4;
+}
+

@@ -27,8 +27,8 @@ function createSearchBar() {
   
 const nextPokemonBtText = `
     <div id="nextPokemonBt" class="nextPokemonBt">
-        <button onclick="loadMorePokemon()" class="btn btn-primary btn-lg">
-            ${createNextPokemonButtonIcon()} Nächste Pokémon
+        <button onclick="loadMorePokemon()" class="btn btn-primary btn-lg" style="background-color:rgb(47,89,130)">
+            ${createNextPokemonButtonIcon()} more Pokémon
         </button>
     </div>
 `;
@@ -138,12 +138,10 @@ function getOrCreateAboutContainer() {
 function createAboutContainer() {
     const container = document.createElement("div");
     container.classList.add("pokemonOverlayDetails");
-    container.setAttribute("id", "pokemonOverlayDetails");
     const parent = document.querySelector('.overlayContainerDetails');
     if (parent) parent.appendChild(container);
     return container;
 }
-
 
 
 

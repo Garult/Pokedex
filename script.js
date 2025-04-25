@@ -99,7 +99,7 @@ function getSearchInput() {
 
 function resetPokemonSearch(nextBtn) {
   if (nextBtn) nextBtn.style.opacity = "0.9";
-  offset = 1;
+  offset = 0;
 
   // Reset global Pokémon list and clear container
   pokemonList = [];
@@ -460,7 +460,7 @@ function overlayDetailsShiny(details) {
 function showAbout() {
   const details = pokemonMap.get(currentPokemonId);
   const container = document.getElementById("pokemonOverlayDetails");
-  container.style.backgroundColor = "white";
+  container.style.backgroundColor =" #EEE9DB";
   container.classList.remove("pokemonOverlayDetailsSparkling");
   overlayDetailsAbout(details);
 }
@@ -468,7 +468,7 @@ function showAbout() {
 function showBaseStats() {
   const details = pokemonMap.get(currentPokemonId);
   const container = document.getElementById("pokemonOverlayDetails");
-  container.style.backgroundColor = "white";
+  container.style.backgroundColor = "#EEE9DB";
   container.classList.remove("pokemonOverlayDetailsSparkling");
   overlayDetailsBaseStats(details);
 }
