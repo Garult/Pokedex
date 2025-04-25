@@ -19,15 +19,14 @@ function createHeaderImages() {
 
 function createSearchBar() {
     return `
-        <div class="input-group mb-3">
-            <input id="searchBarInput" type="text" class="form-control" placeholder="Search Pokémon">
-            <button onclick="minLengthSearchBar()" class="btn btn-outline-secondary">Search</button>
-        </div>
+      <div class="input-group mb-3">
+          <input id="searchBarInput" type="text" class="form-control" placeholder="Search Pokémon">
+      </div>
     `;
-}
-
+  }
+  
 const nextPokemonBtText = `
-    <div class="nextPokemonBt">
+    <div id="nextPokemonBt" class="nextPokemonBt">
         <button onclick="loadMorePokemon()" class="btn btn-primary btn-lg">
             ${createNextPokemonButtonIcon()} Nächste Pokémon
         </button>
